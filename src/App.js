@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import Navigation from './components/Navigation';
+import Hero from './components/Hero';
+import AboutLabel from './components/AboutLabel';
+import Albums from './components/Albums';
+import ArtistSection from './components/ArtistSection';
+import Footer from './components/Footer';
 
 function App() {
+  useEffect(() => {
+    // Remove preload class to enable transitions after page loads
+    document.body.classList.add('preload');
+
+    setTimeout(() => {
+      document.body.classList.remove('preload');
+    }, 100);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navigation />
+      <Hero />
+      <AboutLabel />
+      <Albums />
+      <ArtistSection />
+      <Footer />
     </div>
   );
 }
