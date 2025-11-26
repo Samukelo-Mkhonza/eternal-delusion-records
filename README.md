@@ -1,70 +1,161 @@
-# Getting Started with Create React App
+# Eternal Delusion Records
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Official website for Eternal Delusion Records, an independent hip-hop record label based in Harding, KwaZulu-Natal.
+
+## About
+
+Eternal Delusion Records is an independent hip-hop label dedicated to showcasing talented artists and delivering quality music. Our tagline "Reach Beyond the Clouds" embodies our mission to push creative boundaries and elevate artists to new heights.
+
+## Features
+
+- **Responsive Design**: Fully responsive layout optimized for all device sizes
+- **Modern UI**: Clean, dark-themed interface with smooth animations
+- **Artist Showcase**: Dedicated section featuring label artists
+- **Album Gallery**: Display of released albums and projects
+- **Smooth Navigation**: Seamless scrolling between sections
+- **Performance Optimized**: Fast loading times with optimized assets
+
+## Tech Stack
+
+- **React** (v19.2.0) - Frontend framework
+- **Tailwind CSS** (v3.4.17) - Utility-first CSS framework
+- **React Icons** (v5.5.0) - Icon library
+- **Create React App** - Build tooling and configuration
+
+## Prerequisites
+
+Before running this project, make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- npm (comes with Node.js)
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/eternal-delusion-records.git
+```
+
+2. Navigate to the project directory:
+```bash
+cd eternal-delusion-records
+```
+
+3. Install dependencies:
+```bash
+npm install
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+### Development
 
-### `npm start`
+Start the development server:
+```bash
+npm start
+```
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000). The page will reload when you make changes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Testing
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Run the test suite:
+```bash
+npm test
+```
+Launches the test runner in interactive watch mode.
 
-### `npm test`
+### Production Build
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Create a production build:
+```bash
+npm run build
+```
+Builds the app for production to the `build` folder. The build is minified and optimized for best performance.
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+eternal-delusion-records/
+├── public/              # Static assets
+├── src/
+│   ├── components/      # React components
+│   │   ├── Navigation.jsx
+│   │   ├── Hero.jsx
+│   │   ├── AboutLabel.jsx
+│   │   ├── Albums.jsx
+│   │   ├── ArtistSection.jsx
+│   │   └── Footer.jsx
+│   ├── App.js          # Main application component
+│   ├── index.js        # Application entry point
+│   └── index.css       # Global styles and Tailwind directives
+├── package.json
+└── tailwind.config.js  # Tailwind CSS configuration
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Adding New Components
 
-### `npm run eject`
+Components are located in the `src/components/` directory. Each component is self-contained and can be imported into the main [App.js](src/App.js) file.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Styling
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project uses Tailwind CSS for styling. Custom styles and Tailwind configurations can be found in:
+- [tailwind.config.js](tailwind.config.js) - Tailwind configuration
+- [src/index.css](src/index.css) - Global styles and Tailwind directives
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Custom Animations
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Custom CSS animations are defined inline within components using the `<style jsx>` syntax. Global animations are defined in [src/index.css](src/index.css).
 
-## Learn More
+## Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Build for Production
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
 
-### Code Splitting
+The optimized production build will be created in the `build/` folder, ready for deployment.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Deployment Options
 
-### Analyzing the Bundle Size
+This React app can be deployed to various platforms:
+- **Vercel**: Connect your GitHub repository for automatic deployments
+- **Netlify**: Drag and drop the build folder or connect via GitHub
+- **GitHub Pages**: Use `gh-pages` package for deployment
+- **Traditional Hosting**: Upload the build folder to any web hosting service
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+For detailed deployment instructions, see the [Create React App deployment documentation](https://facebook.github.io/create-react-app/docs/deployment).
 
-### Making a Progressive Web App
+## Browser Support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This project supports all modern browsers:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-### Advanced Configuration
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+If you'd like to contribute to this project:
 
-### Deployment
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## License
 
-### `npm run build` fails to minify
+This project is private and proprietary to Eternal Delusion Records.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact
+
+For inquiries about Eternal Delusion Records:
+- Location: Harding, KwaZulu-Natal
+- Label Focus: Independent Hip-Hop
+
+---
+
+Built with React and Tailwind CSS
