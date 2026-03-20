@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
-
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
@@ -11,42 +9,30 @@ html {
 
 body {
   margin: 0;
-  background-color: #000;
-  color: #fff;
-  font-family: 'Montserrat', sans-serif;
+  background-color: #0a0a0a;
+  color: #F5F0EB;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 5px;
+  background: #8B0000;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* Global transitions */
-* {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  background: #DC143C;
 }
 
 /* Prevent transition on page load */
@@ -60,33 +46,75 @@ code {
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
 
+  .text-shadow-crimson {
+    text-shadow: 0 0 40px rgba(139, 0, 0, 0.4);
+  }
+
   .backdrop-blur-custom {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
-
-  .gradient-text {
-    background: linear-gradient(to right, #fff, #aaa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
 }
 
-/* Smooth fade-in on scroll */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Grain / noise overlay */
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  animation: grain 0.5s steps(1) infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
 }
 
-.fade-in-up {
-  animation: fadeInUp 0.8s ease-out;
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Custom cursor */
+.custom-cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: #DC143C;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor.cursor-hover {
+  transform: translate(-50%, -50%) scale(2.5);
+  opacity: 0.6;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
 }
 
 /* Hover effects */
@@ -96,7 +124,16 @@ code {
 
 .hover-lift:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(139, 0, 0, 0.15);
+}
+
+.hover-crimson-glow {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hover-crimson-glow:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(139, 0, 0, 0.5), 0 0 60px rgba(139, 0, 0, 0.2);
 }
 
 /* Smooth image loading */
@@ -110,13 +147,34 @@ img:not([src]) {
 
 /* Focus styles for accessibility */
 button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #fff;
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #C9A84C;
   outline-offset: 4px;
 }
 
 /* Selection color */
 ::selection {
-  background-color: #fff;
-  color: #000;
+  background-color: #8B0000;
+  color: #F5F0EB;
+}
+
+/* Form input styles */
+input, textarea, select {
+  font-family: 'Inter', sans-serif;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
 }

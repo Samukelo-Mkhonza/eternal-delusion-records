@@ -1,13 +1,24 @@
-import React from 'react';
-import { FaInstagram, FaYoutube, FaTwitter, FaEnvelope, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaInstagram, FaYoutube, FaTwitter, FaSpotify, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail('');
+    }
+  };
 
   const socialLinks = [
     { icon: <FaInstagram />, url: 'https://instagram.com', label: 'Instagram' },
     { icon: <FaYoutube />, url: 'https://youtube.com', label: 'YouTube' },
-    { icon: <FaTwitter />, url: 'https://twitter.com', label: 'Twitter' }
+    { icon: <FaTwitter />, url: 'https://twitter.com', label: 'X (Twitter)' },
+    { icon: <FaSpotify />, url: 'https://spotify.com', label: 'Spotify' }
   ];
 
   const scrollToSection = (sectionId) => {
@@ -18,43 +29,66 @@ const Footer = () => {
   };
 
   return (
-    <footer id="contact" className="relative py-12 px-4 border-t border-white/10 bg-black">
+    <footer className="relative py-16 px-4 border-t border-white/[0.06] bg-dark">
       <div className="max-w-6xl mx-auto">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          {/* Brand */}
           <div className="text-center md:text-left">
-            <h3 className="text-2xl font-black mb-3 tracking-tight">
+            <h3 className="font-display text-3xl tracking-wider text-offwhite mb-3">
               ETERNAL DELUSION
             </h3>
-            <p className="text-sm font-medium text-gray-400 mb-4">
-              Reach Beyond the Clouds
+            <p className="font-body text-sm italic text-gold mb-4">
+              Sound That Haunts You
             </p>
-            <div className="flex items-center justify-center md:justify-start gap-2 text-gray-400 text-sm">
-              <FaMapMarkerAlt />
-              <span>Harding, KwaZulu-Natal</span>
-            </div>
+            <p className="font-body text-xs text-offwhite/30 leading-relaxed">
+              Independent South African record label rooted in urban and township culture.
+              Harding, KwaZulu-Natal.
+            </p>
           </div>
 
           {/* Quick Links */}
           <div className="text-center">
-            <h4 className="text-lg font-black mb-4 tracking-tight">QUICK LINKS</h4>
+            <h4 className="font-display text-lg tracking-widest text-offwhite mb-4">NAVIGATE</h4>
             <nav className="space-y-2">
-              {['home', 'about', 'albums', 'artists'].map((section) => (
+              {['home', 'artists', 'releases', 'about', 'news', 'submit'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className="block w-full text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300"
+                  className="block w-full font-body text-xs font-medium tracking-widest text-offwhite/30 hover:text-gold transition-colors duration-300"
                 >
-                  {section.toUpperCase()}
+                  {section === 'submit' ? 'SUBMIT DEMO' : section.toUpperCase()}
                 </button>
               ))}
             </nav>
           </div>
 
-          {/* Contact & Social */}
+          {/* Newsletter + Social */}
           <div className="text-center md:text-right">
-            <h4 className="text-lg font-black mb-4 tracking-tight">CONNECT</h4>
+            <h4 className="font-display text-lg tracking-widest text-offwhite mb-4">STAY CONNECTED</h4>
+
+            {/* Newsletter */}
+            {subscribed ? (
+              <p className="font-body text-sm text-gold mb-6">You're in. Welcome to the delusion.</p>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex gap-2 mb-6 max-w-xs mx-auto md:ml-auto md:mr-0">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2 font-body text-xs text-offwhite placeholder-offwhite/30 focus:border-crimson outline-none transition-all duration-300"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="bg-gold text-dark font-display text-xs tracking-wider px-4 py-2 rounded-lg hover:bg-gold/80 transition-all duration-300"
+                >
+                  JOIN
+                </button>
+              </form>
+            )}
+
+            {/* Social icons */}
             <div className="flex justify-center md:justify-end gap-3 mb-4">
               {socialLinks.map((social, index) => (
                 <a
@@ -62,40 +96,32 @@ const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 bg-white/5 hover:bg-white hover:text-black rounded-lg transition-all duration-300 transform hover:scale-110"
+                  className="flex items-center justify-center w-10 h-10 bg-white/[0.04] border border-white/[0.06] hover:bg-blood hover:border-blood rounded-lg transition-all duration-300 text-offwhite/50 hover:text-offwhite"
                   aria-label={social.label}
                 >
                   {social.icon}
                 </a>
               ))}
             </div>
+
             <a
               href="mailto:contact@eternaldelusionrecords.com"
-              className="inline-flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300"
+              className="inline-flex items-center gap-2 font-body text-xs text-offwhite/30 hover:text-gold transition-colors duration-300"
             >
               <FaEnvelope />
-              <span>Get in Touch</span>
+              contact@eternaldelusionrecords.com
             </a>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-white/10 mb-6"></div>
+        <div className="h-px bg-white/[0.06] mb-8"></div>
 
-        {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-          <p className="text-gray-400 font-medium text-center md:text-left">
-            © {currentYear} Eternal Delusion Records. All rights reserved.
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="font-body text-xs text-offwhite/20">
+            &copy; {currentYear} Eternal Delusion Records. All rights reserved.
           </p>
-          <p className="flex items-center gap-2 text-gray-400 font-medium">
-            Made with <FaHeart className="text-red-500 animate-pulse" /> for Hip-Hop Culture
-          </p>
-        </div>
-
-        {/* Tagline */}
-        <div className="mt-6 text-center">
-          <p className="text-xs font-bold text-gray-500 tracking-widest">
-            INDEPENDENT • AUTHENTIC • ETERNAL
+          <p className="font-display text-xs tracking-[0.3em] text-offwhite/15">
+            INDEPENDENT &bull; AUTHENTIC &bull; ETERNAL
           </p>
         </div>
       </div>
